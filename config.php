@@ -41,11 +41,19 @@ function fetch_users(): array {
     return [$data, null];
 }
 
+/** Get a field from a user array, ignoring key case (API uses "Email", "Password", ...). */
+function uget(array $u, string $key): ?string {
+    foreach ($u as $k => $v) if (strcasecmp((string)$k, $key) === 0) return is_scalar($v) ? (string)$v : null;
+    return null;
+}
+
 /** Find a user by email or username (case-insensitive). */
 function find_user(array $users, string $login): ?array {
     foreach ($users as $u) {
+        if (!is_array($u)) continue;
         foreach (['email', 'username'] as $f) {
-            if (isset($u[$f]) && strcasecmp((string)$u[$f], $login) === 0) return $u;
+            $val = uget($u, $f);
+            if ($val !== null && strcasecmp($val, $login) === 0) return $u;
         }
     }
     return null;
