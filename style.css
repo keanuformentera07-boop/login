@@ -1,0 +1,9 @@
+body{font-family:system-ui,sans-serif;background:#f3f4f6;display:grid;place-items:center;min-height:100vh;margin:0}
+.card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 4px 20px #0001;width:min(360px,92vw)}
+h1{font-size:1.3rem;margin:0 0 1rem}label{display:block;font-size:.85rem;margin:.8rem 0 .25rem}
+input{width:100%;padding:.6rem;border:1px solid #ccd;border-radius:8px;box-sizing:border-box;font-size:1rem}
+button{margin-top:1rem;width:100%;padding:.7rem;border:0;border-radius:8px;background:#2563eb;color:#fff;font-size:1rem;cursor:pointer}
+button.alt{background:#e5e7eb;color:#111}button:disabled{opacity:.5;cursor:not-allowed}
+.err{background:#fee2e2;color:#991b1b;padding:.6rem;border-radius:8px;margin-bottom:.8rem;font-size:.9rem}
+.note{background:#fef9c3;padding:.6rem;border-radius:8px;font-size:.85rem;margin-bottom:.8rem}
+.timer{text-align:center;font-weight:600;margin-top:.8rem}
