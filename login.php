@@ -19,11 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $user = find_user($users, $login);
             // Same message for unknown user / wrong password (no account enumeration)
-            if (!$user || !isset($user['password']) || !password_ok($pass, (string)$user['password'])) {
+            $stored = $user ? uget($user, 'password') : null;
+            if (!$user || $stored === null || !password_ok($pass, $stored)) {
                 $error = 'Invalid credentials.';
             } else {
                 session_regenerate_id(true);
-                unset($user['password']);
+                foreach (array_keys($user) as $k) if (strcasecmp((string)$k, 'password') === 0) unset($user[$k]);
                 $_SESSION['pending_user'] = $user;   // password verified, but NOT logged in until OTP passes
                 send_otp($user, issue_otp());
                 header('Location: verify.php'); exit;
